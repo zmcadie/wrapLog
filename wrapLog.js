@@ -1,9 +1,7 @@
 var wrapLog = function (callback, name) {
-  return function(x, y, z) {
-    var args = [x, y, z]
-    var newArgs = []
-    args.forEach(function(item){ if (item != undefined) newArgs.push(item) })
-    console.log(name + '(' + newArgs.join(', ') + ') => ' + callback(x, y, z))
+  return function() {
+    var args = Array.prototype.slice.call(arguments)
+    console.log(name + '(' + args.join(', ') + ') => ' + callback.apply(null, args))
   }
 };
 
